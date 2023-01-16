@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<div>
+    <h1>All profile:</h1>
+</div>
+<body>
+<table border="1">
+    <tr>
+        <th>firstName</th>
+        <th>lastName</th>
+        <th>user email</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:utext="${user.getFirstName()}">firstName</td>
+        <td th:utext="${user.getLastName()}">lastName</td>
+        <td th:utext="${user.getEmail()}">user email</td>
+        <td>
+            <div class="card-body">
+                <form th:action = "@{user/edit/{id}(id=${user.getId()})}" th:object="${user}" method="GET">
+                    <div class = "box-footer">
+                        <button type="submit" class = "btn btn-primary">
+                            edit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </td>
+        <td>
+            <div class="card-body">
+                <form th:action="'/user/delete?id='+${user.getId()}" th:object="${user}" method="POST">
+                    <div class = "box-footer">
+                        <button type="submit" class = "btn btn-primary">
+                            delete
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </td>
+    </tr>
+</table>
+<br/>
+<div class="row">
+    <div class="col-lg-3">
+        <a th:href="@{/users/new}" class="btn btn-primary btn-sm mb-3"> Add user</a>
+    </div>
+</div>
+</body>
+</html>

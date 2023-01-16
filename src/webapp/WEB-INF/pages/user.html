@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<div>
+    <h1>User profile:</h1>
+</div>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center">
+            <h1 class="text-center"> Create new User </h1>
+            <div class="card-body">
+                <form th:action="@{/user}" th:object="${user}" method="post">
+                    <div class="form-group">
+                        <label> User first name </label>
+                        <input
+                                type="text"
+                                name="firstName"
+                                th:field="*{firstName}"
+                                class="form-control"
+                                placeholder="Enter user first name"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label> User first name </label>
+                        <input
+                                type="text"
+                                name="lastName"
+                                th:field="*{lastName}"
+                                class="form-control"
+                                placeholder="Enter user last name"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label> User first name </label>
+                        <input
+                                type="text"
+                                name="email"
+                                th:field="*{email}"
+                                class="form-control"
+                                placeholder="Enter user email"
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label> User first name </label>
+                        <input
+                                type="text"
+                                name="email"
+                                th:field="*{email}"
+                                class="form-control"
+                                placeholder="Enter user email"
+                        />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>firstName</th>
+        <th>lastName</th>
+        <th>user email</th>
+    </tr>
+    <tr>
+        <td th:utext="id" ></td>
+<!--        <td th:utext="${user.getId()}">id</td>-->
+        <td th:utext="${user.getFirstName()}">firstName</td>
+        <td th:utext="${user.getLastName()}">lastName</td>
+        <td th:utext="${user.getEmail()}">user email</td>
+    </tr>
+</table>
+</body>
+</html>
