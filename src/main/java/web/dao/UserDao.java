@@ -10,12 +10,10 @@ import javax.persistence.PrePersist;
 import java.util.List;
 
 @Repository
-public class UserDao implements Dao<Long, User> {
+public class UserDao implements Dao {
 
     @PersistenceContext
-    private EntityManager entityManager;
-
-    @Override
+    private EntityManager entityManager;@Override
     public void add(User user) {
         entityManager.persist(user);
     }

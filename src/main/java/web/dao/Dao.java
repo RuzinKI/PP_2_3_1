@@ -1,16 +1,18 @@
 package web.dao;
 
+import web.entity.User;
+
 import java.util.List;
 
-public interface Dao<K,E> {
+public interface Dao {
 
-    void add(E e);
+    void add(User user);
 
-    List<E> getAll();
+    List<User> getAll();
 
-    E getById(K k);
+    User getById(Long id);
 
-    void delete(E e);
+    void delete(User user);
 
-    void update(E e);
+    void update(User user);
 }
