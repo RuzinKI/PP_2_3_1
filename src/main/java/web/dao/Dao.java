@@ -12,7 +12,7 @@ public interface Dao {
 
     User getById(Long id);
 
-    void delete(User user);
+    void delete(Long id);
 
     void update(User user);
 }

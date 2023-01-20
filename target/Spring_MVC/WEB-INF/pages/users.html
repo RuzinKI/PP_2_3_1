@@ -15,30 +15,20 @@
         <th>lastName</th>
         <th>user email</th>
     </tr>
-    <tr th:each="user : ${users}">
-        <td th:utext="${user.getFirstName()}">firstName</td>
-        <td th:utext="${user.getLastName()}">lastName</td>
-        <td th:utext="${user.getEmail()}">user email</td>
+    <tr th:each="userq : ${users}">
+        <td th:utext="${userq.getFirstName()}">firstName</td>
+        <td th:utext="${userq.getLastName()}">lastName</td>
+        <td th:utext="${userq.getEmail()}">user email</td>
         <td>
             <div class="card-body">
-                <form th:action = "@{user/edit/{id}(id=${user.getId()})}" th:object="${user}" method="GET">
-                    <div class = "box-footer">
-                        <button type="submit" class = "btn btn-primary">
-                            edit
-                        </button>
-                    </div>
-                </form>
+                <a th:href="@{/users/edit/{id}(id=${userq.getId()})}"
+                   class="btn btn-primary"> Update </a>
             </div>
         </td>
         <td>
             <div class="card-body">
-                <form th:action="'/user/delete?id='+${user.getId()}" th:object="${user}" method="POST">
-                    <div class = "box-footer">
-                        <button type="submit" class = "btn btn-primary">
-                            delete
-                        </button>
-                    </div>
-                </form>
+                <a th:href="@{/users/delete/{id}(id=${userq.getId()})}"
+                   class="btn btn-danger"> Delete </a>
             </div>
         </td>
     </tr>

@@ -15,65 +15,45 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = {"users"})
+    @GetMapping("users")
     public String getUserList(Model model) {
         model.addAttribute("users", userService.getAll());
         return "users";
     }
 
-    @PostMapping(value = "/users")
-    public String saveStudent(@ModelAttribute("user") User user, Model model) {
+    @PostMapping("/users")
+    public String saveStudent(@ModelAttribute("user") User user) {
         System.out.println("save user");
         userService.add(user);
-        model.addAttribute("users", userService.getAll());
-        return "users";
-    }
-
-    @PostMapping(value = "/user/edit/{id}")
-    public String editUserPost(@PathVariable Long id,
-                             @ModelAttribute("user") User user,
-                             Model model) {
-        User oldUser = userService.getById(id);
-        oldUser.setId(id);
-        oldUser.setFirstName(user.getFirstName());
-        oldUser.setLastName(user.getLastName());
-        oldUser.setEmail(user.getEmail());
-
-        userService.update(oldUser);
-        model.addAttribute("users", userService.getAll());
         return "redirect:/users";
     }
 
-    @GetMapping(value = {"user/edit/{id}"})
-    public String editUser(@PathVariable Long id, Model model) {
+    @GetMapping("users/edit/{id}")
+    public String editUser(@PathVariable Long id,
+                           Model model) {
         User userEdit = userService.getById(id);
-        model.addAttribute("user",userEdit);
+        model.addAttribute("userV",userEdit);
         return "edit_user";
     }
 
-    @PostMapping(value = "/user/delete")
-    public String deleteUser(@ModelAttribute("user") User user, Model model) {
-        userService.delete(user);
-        model.addAttribute("users", userService.getAll());
+    @PostMapping("/users/edit/{id}")
+    public String editUserPost(@PathVariable Long id,
+                               @ModelAttribute("user") User user) {
+        user.setId(id);
+        userService.update(user);
         return "redirect:/users";
     }
 
-    @GetMapping(value = {"users/new"})
+    @GetMapping("/users/delete/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        userService.delete(id);
+        return "redirect:/users";
+    }
+
+    @GetMapping("users/new")
     public String createNewUser(Model model) {
         User user = new User();
         model.addAttribute("user",user);
         return "new_user";
     }
-
-    @GetMapping(value = {"user"})
-    public String getOneUser(@RequestParam(value = "id", required = false) Long id, Model model) {
-        if (id != null) {
-            model.addAttribute("user", userService.getById(id));
-            return "user";
-        } else {
-            model.addAttribute("users", userService.getAll());
-            return "users";
-        }
-    }
-
 }
